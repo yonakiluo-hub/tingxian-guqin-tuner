@@ -35,7 +35,7 @@ A4 = 440 Hz 时，正调目标频率依次为 **65.41、73.42、87.31、98.00、
 
 ### Android
 
-从 [GitHub Releases 下载安卓安装包](https://github.com/yonakiluo-hub/tingxian-guqin-tuner/releases/latest)，或按下方构建步骤自行生成。APK 作为 Release 附件发布，未提交到 Git 源码历史；当前为体验版，暂未上架应用商店。
+从 [GitHub Release 下载安卓安装包](https://github.com/yonakiluo-hub/tingxian-guqin-tuner/releases/tag/v1.0.0)，或按下方构建步骤自行生成。APK 作为 Release 附件发布，未提交到 Git 源码历史；当前为体验版，暂未上架应用商店。
 
 要求 **Android 8.0 及以上**，并使用近期版本的 **Android System WebView / Chrome**。安装后选择调式和琴弦，点击“开始调音”，允许麦克风权限，再逐根拨响散音。应用内置资源可离线使用，APK 不声明联网权限。
 
