@@ -1,0 +1,8 @@
+{
+  "name": "tingxian-guqin-tuner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "听弦 · 七弦古琴调音器",
+  "scripts": {"test": "node --test tests/*.test.mjs", "start": "node server.mjs"}
+}

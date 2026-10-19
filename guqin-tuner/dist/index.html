@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta name="description" content="听弦，专为古琴而作的七弦调音器。正调、慢三、紧五，静心听一弦。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="听弦">
+  <title>听弦 · 古琴调音器</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 4 5 9H2v6h3l6 5ZM15 8a6 6 0 0 1 0 8M18 4a11 11 0 0 1 0 16"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16M9 4v6M16 14v6"/><circle cx="9" cy="7" r="2"/><circle cx="16" cy="17" r="2"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
+    <symbol id="i-tune" viewBox="0 0 24 24"><path d="M5 8v8M9 4v16M13 7v10M17 3v18M21 9v6"/></symbol>
+    <symbol id="i-modes" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/><circle cx="9" cy="5" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="8" cy="19" r="2"/></symbol>
+    <symbol id="i-guide" viewBox="0 0 24 24"><path d="M12 5v15M3 4c4-1 7-1 9 1 2-2 5-2 9-1v15c-4-1-7-1-9 1-2-2-5-2-9-1Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  </defs></svg>
+  <header class="site-header">
+    <a class="brand" href="#tuner" aria-label="听弦首页"><span class="seal">听</span><span><strong>听弦</strong><small>古 琴 调 音 器</small></span></a>
+    <nav class="navigation" aria-label="主导航">
+      <button data-view="tuner" class="nav-item active" aria-current="page"><svg><use href="#i-tune"/></svg><span>调音</span></button>
+      <button data-view="modes" class="nav-item"><svg><use href="#i-modes"/></svg><span>调式</span></button>
+      <button data-view="guide" class="nav-item"><svg><use href="#i-guide"/></svg><span>使用指南</span></button>
+    </nav>
+    <button id="settings-open" class="icon-button" aria-label="调音设置"><svg><use href="#i-settings"/></svg></button>
+  </header>
+
+  <main>
+    <section id="view-tuner" class="view" aria-label="调音器">
+      <div class="page-intro"><div><p class="eyebrow">静 心 · 听 音</p><h1>一弦一音，自在清和。</h1></div><span class="local-badge"><i></i>声音仅在本机处理</span></div>
+      <div class="workspace">
+        <section class="tuner-card" aria-label="实时音准">
+          <div class="tuner-toolbar"><button id="mode-open" class="mode-select"><span class="small-label">当前调式</span><span><b id="mode-name">正调</b><svg><use href="#i-chevron"/></svg></span></button><button id="auto-toggle" class="auto-toggle" aria-pressed="false"><span class="switch"><i></i></span>自动识弦</button></div>
+          <div class="tuner-center">
+            <div id="listening-status" class="listening-status"><i></i><span>准备就绪</span></div>
+            <div class="target-note"><span id="selected-string">一弦</span><strong id="target-note">C<sub>2</sub></strong><span class="target-caption">目标 <b id="target-frequency">65.41</b> Hz</span></div>
+            <div class="meter" id="meter" role="meter" aria-label="音准偏差，单位音分" aria-valuemin="-50" aria-valuemax="50" aria-valuenow="0" aria-valuetext="尚未检测到声音">
+              <svg viewBox="0 0 440 166" class="meter-art" aria-hidden="true"><path d="M38 142 A196 196 0 0 1 402 142" class="meter-arc"/><path d="M207 23 A196 196 0 0 1 233 23" class="meter-good"/><g id="meter-ticks"></g><path d="M220 17v18" class="center-tick"/><g id="meter-needle"><path class="pointer-head" d="M220 41l-5 11h10Z"/><path d="M220 52v7"/></g></svg>
+              <div class="meter-labels"><span>−50</span><span>−25</span><span>0</span><span>+25</span><span>+50</span></div>
+              <div class="meter-directions"><span>偏低 · 稍紧</span><span>偏高 · 稍松</span></div>
+            </div>
+            <div class="readout"><strong id="cents-value">—</strong><span>音分</span><span class="readout-divider"></span><b id="detected-frequency">—</b><span>Hz</span></div>
+            <p id="tuning-hint" class="tuning-hint" aria-live="polite">轻拨一弦，让琴声慢慢舒展</p>
+          </div>
+          <div class="tuner-actions"><button id="listen-button" class="primary-button"><svg><use href="#i-mic"/></svg><span>开始调音</span></button><button id="tone-button" class="tone-button"><svg><use href="#i-sound"/></svg><span>听参考音</span></button></div>
+          <p class="micro-hint" id="micro-hint">允许使用麦克风后，拨响一根空弦</p>
+          <div id="error-message" class="error-message" role="alert" hidden></div>
+        </section>
+
+        <aside class="strings-panel">
+          <div class="panel-heading"><div><p class="eyebrow">七 弦 散 音</p><h2>择弦而调</h2></div><span id="selection-mode">手动选弦</span></div>
+          <div id="strings-list" class="strings-list" role="group" aria-label="选择琴弦"></div>
+          <div class="string-note"><span class="note-mark">弦</span><p id="mode-description">以正调为基，循音而定。</p></div>
+        </aside>
+      </div>
+      <div class="bottom-note"><span>散音调弦 · 请勿按弦</span><button id="calibration-open">基准 A4 = <b id="a4-label">440</b> Hz <svg><use href="#i-settings"/></svg></button><span>十二平均律</span></div>
+    </section>
+
+    <section id="view-modes" class="view" aria-label="调式库" hidden>
+      <div class="page-intro"><div><p class="eyebrow">随 曲 · 变 调</p><h1>为一曲，择一调。</h1></div><p class="intro-aside">先定正调，再依曲调慢紧。</p></div>
+      <div id="mode-cards" class="mode-cards"></div>
+      <div class="info-strip"><strong>关于音高</strong><p>本应用以现代常用音高、十二平均律作电子调音参考。古琴传统定弦也会依琴、弦、曲目与师承而调整；合奏时请与其他乐器统一基准。变调请小幅调整，避免骤然紧弦。</p></div>
+    </section>
+
+    <section id="view-guide" class="view" aria-label="使用指南" hidden>
+      <div class="page-intro"><div><p class="eyebrow">初 识 · 听 弦</p><h1>从一声清音开始。</h1></div></div>
+      <div class="guide-layout"><div class="guide-steps">
+        <article><span>01</span><div><h2>择调，选弦</h2><p>选择曲目所需的调式，再点选一至七弦。初次调弦建议使用手动选弦，避免泛音或相邻琴弦影响自动识别。</p></div></article>
+        <article><span>02</span><div><h2>打开麦克风，轻拨散音</h2><p>点击「开始调音」并允许麦克风权限。将手机放在琴旁约 20–40 厘米，逐根拨响空弦，其他琴弦用手轻触止音。等拨弦起音过去后，观察稳定读数。</p></div></article>
+        <article><span>03</span><div><h2>看音分，慢慢调</h2><p>负数表示偏低，适当紧弦；正数表示偏高，适当松弦。偏差进入 ±5 音分并稳定片刻时，会显示「音准已合」。大幅偏离时先确认弦号与八度。</p></div></article>
+        <article><span>04</span><div><h2>复听七弦，彼此相和</h2><p>全部调好后再检查一遍。可用「听参考音」辅助听辨；播放期间调音检测会暂时避开参考音，结束后自动恢复。</p></div></article>
+      </div><aside class="guide-aside"><div class="guide-quote">弦外有音<br>静中自得</div><details open><summary>安卓 / iPhone 如何使用？</summary><p>安卓可安装配套 APK；网页也可在手机浏览器使用。iPhone 用 Safari 打开在线地址，再从分享菜单选择「添加到主屏幕」。首次使用需允许麦克风。</p></details><details><summary>检测不到声音怎么办？</summary><p>检查系统与浏览器的麦克风权限，并确认没有其他应用占用麦克风。关闭蓝牙耳机，靠近琴身重试。网页版需要 HTTPS 或电脑本机 localhost 地址，普通局域网 HTTP 地址无法录音。</p></details><details><summary>为什么音高会跳动？</summary><p>古琴的泛音、余音和环境噪声会影响读数。请逐根拨弦、止住其他弦，等待起音后再观察。一弦低频尤其容易受到麦克风与室内噪声影响，可改用手动选弦和参考音复核。</p></details><details><summary>录音会保存或上传吗？</summary><p>不会。音频仅在本机实时分析，不生成录音文件，也不上传声音。离开页面或切到后台会停止麦克风，需要回来后再次点击开始。</p></details><button id="install-button" class="secondary-button">添加到手机主屏幕</button><p id="install-help" class="subtle"></p></aside></div>
+      <p class="source-note">定弦参考：<a href="https://www.atlasensemble.nl/assets/files/instruments/Guqin/Guqin%20by%20Ziwen%20Kong.pdf" target="_blank" rel="noopener noreferrer">Atlas Ensemble 古琴教材</a>、<a href="https://www.dpm.org.cn/Uploads/File/2022/10/25/u6357951133e58.pdf" target="_blank" rel="noopener noreferrer">故宫博物院《古琴的定弦方式》</a>。各调式以页面列示的实际音名为准。</p>
+    </section>
+  </main>
+  <footer class="site-footer"><span>听弦 <i>·</i> 于静处，寻清音</span><span>GUQIN TUNER <i>·</i> 1.0</span></footer>
+  <dialog id="settings-dialog" aria-labelledby="settings-title"><div class="dialog-heading"><div><p class="eyebrow">听 音 · 校 准</p><h2 id="settings-title">调音设置</h2></div><button class="icon-button dialog-close" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button></div><label for="a4-input" class="setting-label">标准音 A4 <span>Hz</span></label><div class="calibration-control"><button id="a4-minus" aria-label="降低标准音1赫兹">−</button><input type="number" id="a4-input" min="415" max="466" step="1" value="440" inputmode="numeric"><button id="a4-plus" aria-label="提高标准音1赫兹">+</button></div><p class="subtle">支持 415–466 Hz。通常使用 440 Hz；与其他乐器合奏时可按需要调整。</p><button id="a4-reset" class="text-button">恢复 440 Hz</button><div class="setting-rule"><b>判定范围</b><span>±5 音分，持续稳定后提示</span></div><p class="privacy-note">麦克风仅在调音时开启。所有音频分析在你的设备上完成。</p><button id="settings-done" class="primary-button">保存设置</button><p id="settings-error" role="alert" class="error-message" hidden></p></dialog>
+  <dialog id="mode-dialog" aria-labelledby="mode-dialog-title"><div class="dialog-heading"><div><p class="eyebrow">七 弦 · 多 调</p><h2 id="mode-dialog-title">选择调式</h2></div><button class="icon-button dialog-close" aria-label="关闭调式选择"><svg><use href="#i-close"/></svg></button></div><div id="mode-options"></div><p class="subtle">调式改变后，七弦目标音高会同步更新。</p></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

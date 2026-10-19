@@ -1,0 +1,40 @@
+# Local environments and generated output
+/work/
+/outputs/
+/toolchain/
+/downloads/
+node_modules/
+android/build/
+__pycache__/
+*.py[cod]
+*.log
+
+# Signing identities and local credentials
+android/signing/
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+.env
+.env.*
+!.env.example
+local.properties
+
+# Private hosting/account configuration
+.openai/
+.codex/
+.agents/
+
+# Packages belong in Releases, not source history
+*.apk
+*.aab
+*.zip
+*.tar.gz
+
+# Editor and OS state
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
