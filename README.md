@@ -1,5 +1,7 @@
 # 听弦 · 古琴调音器
 
+**简体中文** | [English](README.en.md)
+
 面向手机的七弦古琴调音器，支持 **正调、慢三、紧五、慢二**。提供 Android 离线应用与浏览器版本，共用中文界面和音高检测核心；声音只在设备上处理，不保存或上传录音。
 
 *Tingxian is a seven-string guqin tuner for Android and mobile browsers, with local audio processing and common guqin tunings.*
@@ -111,6 +113,7 @@ npm test
 ```text
 .
 ├── README.md
+├── README.en.md
 ├── guqin-tuner/
 │   ├── dist/                 # 可直接部署的页面、脚本、样式与图标
 │   │   ├── app.js            # 交互、音频生命周期与读数稳定处理
